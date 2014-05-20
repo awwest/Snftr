@@ -26,7 +26,55 @@
         </div>
       </nav>
     </header>
-    <div ng-view></div>
+    <div class="view" ng-view></div>
+
+
+    <script type="text/ng-template" id="text.html">
+      <h1 class="title">{{post.title}}</h1>
+      <p class="body" ng-bind-html="post.body">{{post.body}}</p>
+      <div class="date">{{post.date}}</div>
+    </script>
+
+    <script type="text/ng-template" id="photo.html">
+      <div ng-bind-html="post.photos">{{post.photos}}</div>
+      <p ng-bind-html="post.caption">{{post.caption}}</p>
+      <div>{{post.date}}</div>
+    </script>
+
+    <script type="text/ng-template" id="quote.html">
+      <blockquote ng-bind-html="post.text">{{post.text}}</blockquote>
+      <p ng-bind-html="post.source">{{post.source}}</p>
+      <p>{{post.date}}</p>
+    </script>
+
+    <script type="text/ng-template" id="link.html">
+      <a href={{post.url}}>{{post.title}}</a>
+      <div ng-bind-html="post.description">post.description</div>
+      <div>{{post.date}}</div>
+    </script>
+
+    <script type="text/ng-template" id="chat.html">
+      <div>{{post.title}}</div>
+      <div ng-bind-html="post.body">{{post.body}}</div>
+      <div>{{post.date}}</div>
+    </script>
+
+    <script type="text/ng-template" id="audio.html">
+      <div ng-bind-html="post.player">{{post.player}}</div>
+      <div ng-bind-html="post.caption">{{post.caption}}</div>
+      <div>{{post.date}}</div>
+    </script>
+
+    <script type="text/ng-template" id="video.html">
+      <div ng-bind-html="post.player">{{post.player}}</div>
+      <div ng-bind-html="post.caption">{{post.caption}}</div>
+    </script>
+
+    <script type="text/ng-template" id="answer.html">
+      <div ng-bind-html="post.question">{{post.question}}</div>
+      <a href={{post.askingUrl}}>{{post.askingName}}</a>
+      <div ng-bind-html="post.answer">{{post.answer}}</div>
+    </script>
 
     <script src="lib/angular/angular.js"></script>
     <script src="lib/angular-route/angular-route.js"></script>

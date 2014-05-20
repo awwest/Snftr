@@ -1,6 +1,6 @@
 <div class="container-fluid" ng-model='things'>
   <h1></h1>
-  <form name='findForm'>
+  <form name='findForm' class='form-horizontal'>
     <input ng-model='targetBlog' name='url' placeholder='Enter Blog URL'>
     <select ng-model='contentType'>
       <option value='/'>All</option>
@@ -17,8 +17,9 @@
     <input ng-model='contentSource' placeholder='(Optional) Source'>
     <button type='submit' ng-model='search' ng-click='searchFor(targetBlog)'>Find</button>
   </form>
-  <div ng-repeat='thing in things'>
-    <div class='post' ng-bind-html='thing.html'>{{thing}}</div>
+  <div ng-model='loading' ng-show='showLoading'>Loading...</div>
+  <div class="repeat" ng-repeat='post in things'>
+    <div class='post' ng-include="post.type + '.html'">{{post}}</div>
   </div>
   <a ng-model='nextButton' ng-click='loadNext(postNum)' ng-show='showNext'>Next Page</a>
 </div>

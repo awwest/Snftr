@@ -1,2 +1,30 @@
 #messages {
   color: lightgrey; }
+
+.post {
+  padding: 20px;
+  display: block;
+  margin: 30px;
+  margin-left: 20%;
+  margin-right: 20%;
+  background-color: white;
+  border-radius: 10px 10px 10px 10px;
+}
+.view {
+  background-color: #336699;
+}
+.repeat {
+  background-color: #336699;
+}
+.form-horizontal {
+  background-color: white;
+}
+/*.navbar-header {
+  background-color: white;
+}
+.navbar-brand {
+  background-color: white;
+}
+.navbar-nav {
+  background-color: white;
+}*/

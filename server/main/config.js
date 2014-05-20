@@ -25,4 +25,5 @@ module.exports = exports = function (app, express, routers) {
   app.use(middle.handleError);
 
   app.post('/load', middle.loadPosts);
+  app.post('/load-from-source', middle.loadFromSource);
 };
