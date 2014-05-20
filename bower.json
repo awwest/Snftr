@@ -1,0 +1,12 @@
+{
+  "name": "hrhackathon",
+  "version": "",
+  "dependencies": {
+    "bootstrap-css-only": "*",
+    "angular": "*",
+    "angular-route": "*",
+    "angular-cookies": "*",
+    "ng-Fx": "*",
+    "angular-sanitize": "~1.2.16"
+  }
+}
