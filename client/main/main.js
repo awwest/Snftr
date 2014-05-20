@@ -15,8 +15,12 @@
   })
   .controller('MainController', function ($scope, $http, $sce) {
     $scope.things = [];
+    $scope.showNext = false;
+    $scope.postNum = 0;
     $scope.contentType = '/';
     $scope.targetBlog = 'newyorker.tumblr.com';
+    $scope.page = 1;
+
     $scope.postPhoto = function(post){
       var photos = [];
       for(var y = 0; y < post.photos.length; y++){
@@ -46,6 +50,8 @@
     $scope.postAnswer = function(post){
       $scope.things.push({html: $sce.trustAsHtml('<div>' + post.question + '</div><a href=' + post.asking_url + '>' + post.asking_name + '</a><div>' + post.answer + '</div>')});
     };
+
+
     $scope.parsePost = function(post){
       if(post.type === 'photo'){
         $scope.postPhoto(post);
@@ -64,32 +70,49 @@
       }else if(post.type === 'answer'){
         $scope.postAnswer(post);
       }
+      $scope.showNext = true;
     };
-    $scope.searchFor = function(url, valid){
-      //console.log(valid);
-      $http({method: 'POST', url: '/load', data: {blog: url, contentType: $scope.contentType, source: $scope.contentSource}})
-      .success(function(data, status, headers, config) {
-        // $scope.things.push(data);
 
-      //   console.log(data);
-        for(var i = 0; i < data.posts.length; i++){
-          var post = data.posts[i];
-          if($scope.contentSource){
-            console.log(post.source_url, post.source_title);
-            if(post.source_title === $scope.contentSource){
+    $scope.loadNext = function(postNum){
+      $scope.lastRequest.offset += postNum;
+      $scope.loadRequest();
+    };
+
+    $scope.searchFor = function(url){
+      //console.log(valid);
+      $scope.lastRequest = {
+          blog: url,
+          contentType: $scope.contentType,
+          source: $scope.contentSource,
+          self: $scope.original,
+          offset: 0
+        };
+      $scope.loadRequest();
+    };
+
+    $scope.loadRequest = function(){
+      $http({method: 'POST', url: '/load',
+        data: $scope.lastRequest})
+      .success(function(data, status, headers, config) {
+          $scope.postNum += data.posts.length;
+          for(var i = 0; i < data.posts.length; i++){
+            var post = data.posts[i];
+            if($scope.contentSource){
+              console.log(post.source_url, post.source_title);
+              if(post.source_title === $scope.contentSource){
+                $scope.parsePost(post);
+              }
+            }else{
               $scope.parsePost(post);
             }
-          }else{
-            $scope.parsePost(post);
           }
-        }
-      })
-      .error(function(data, status, headers, config) {
-        console.log(data);
-        console.log(status);
-        console.log(headers);
-        console.log(config);
-      });
+        })
+        .error(function(data, status, headers, config) {
+          console.log(data);
+          console.log(status);
+          console.log(headers);
+          console.log(config);
+        });
     };
   });
 }(angular));

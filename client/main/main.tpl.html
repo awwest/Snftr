@@ -15,13 +15,10 @@
     </select>
     <input ng-model='original' type='checkbox'> Return only original posts </input>
     <input ng-model='contentSource' placeholder='(Optional) Source'>
-    <button type='submit' ng-model='search' ng-click='searchFor(targetBlog, findForm.url.$valid)'>Find</button>
+    <button type='submit' ng-model='search' ng-click='searchFor(targetBlog)'>Find</button>
   </form>
   <div ng-repeat='thing in things'>
-    <div ng-bind-html='thing.html'>{{thing}}</div>
+    <div class='post' ng-bind-html='thing.html'>{{thing}}</div>
   </div>
-
-  <script type="text/ng-template" id="/text.html">
-    Working
-  </script>
+  <a ng-model='nextButton' ng-click='loadNext(postNum)' ng-show='showNext'>Next Page</a>
 </div>

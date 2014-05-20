@@ -38,7 +38,7 @@ module.exports = exports = {
   },
   loadPosts: function (req, res, next){
     console.log(req.body);
-    client.posts(req.body.blog, {type: req.body.contentType, limit: 20}, function(err, data){
+    client.posts(req.body.blog, {type: req.body.contentType, limit: 20, offset: req.body.offset}, function(err, data){
       if(err){
         res.send(err, 404);
       }
