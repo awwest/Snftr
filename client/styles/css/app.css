@@ -19,6 +19,13 @@
 .form-horizontal {
   background-color: white;
 }
+.next {
+  float: right;
+  border-radius: 10px 10px 10px 10px;;
+  color: black;
+  background-color: white;
+  font-size: 200%;
+}
 /*.navbar-header {
   background-color: white;
 }
